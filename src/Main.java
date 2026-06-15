@@ -8,8 +8,6 @@ public class Main {
 
         System.out.println("=========================================");
         System.out.println(" SISTEMA DE CADASTRO DE PERSONAGENS RPG ");
-        System.out.println(" Desenvolvedor: Luiz Gustavo França Barreto Silva");
-        System.out.println(" Orientação: Profa. Rachel Santos");
         System.out.println("=========================================");
 
         while (opcao != 11) {
@@ -38,15 +36,22 @@ public class Main {
                     String classeRpg = scanner.nextLine();
                     System.out.print("Nível: ");
                     int nivel = scanner.nextInt();
-                    System.out.print("Pontos de Vida (HP): ");
-                    int hp = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Tipo de Arma: ");
-                    String arma = scanner.nextLine();
 
-                    Personagem novo = new Personagem(nome, classeRpg, nivel, hp, arma);
-                    arvore.inserir(novo);
-                    System.out.println("Personagem inserido com sucesso!");
+                    if (arvore.buscar(nivel) != null) {
+                        System.out.println("\n[ERRO] Já existe um personagem cadastrado com o nível " + nivel + "!");
+                        System.out.println("Por favor, tente novamente com um nível diferente.");
+                        scanner.nextLine();
+                    } else {
+                        System.out.print("Pontos de Vida (HP): ");
+                        int hp = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.print("Tipo de Arma: ");
+                        String arma = scanner.nextLine();
+
+                        Personagem novo = new Personagem(nome, classeRpg, nivel, hp, arma);
+                        arvore.inserir(novo);
+                        System.out.println("\nPersonagem inserido com sucesso!");
+                    }
                     break;
 
                 case 2:
